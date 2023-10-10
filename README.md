@@ -41,7 +41,6 @@ Things you may want to cover:
 ### Association
 belongs_to :items
 has_one :shipping
-has_one :card
 
 
 ## itemsテーブル
@@ -87,20 +86,6 @@ belongs_to :items
 ### Association
 belongs_to :user
 belongs_to :item
-
-## cardテーブル
-|      Column     |    Type    | Options                        |
-| ----------------| ---------- | ------------------------------ |
-| id              | integer    | null: false, primary key       |
-| user_id         | references | null: false, foreign_key: true |
-| customer_id     | string     | null: false                    |
-| card_id         | string     | null: false                    |
-| expiration_date | date       | null: false                    |#有効期限
-| security_code   | integer    | null: false                    |#セキュリティコード
-
-### Association
-belongs_to :user
-
 
 
 

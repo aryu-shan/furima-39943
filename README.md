@@ -29,7 +29,6 @@ Things you may want to cover:
 | -------------------| ---------- | ------------|
 | nickname           | string     | null: false |
 | email              | string     | null: false |
-| password           | string     | null: false |
 | encrypted_password | string     | null: false |
 | family_name        | string     | null: false |
 | first_name         | string     | null: false |
@@ -37,10 +36,9 @@ Things you may want to cover:
 | first_name_kana    | string     | null: false |
 | birth_day	         | date       | null: false |
 
-
 ### Association
-belongs_to :items
-has_one :shipping
+has_many:items
+has_many:shipping
 
 
 ## itemsテーブル
@@ -49,44 +47,45 @@ has_one :shipping
 | ---------------| ---------- | ------------------------------ |
 | name           | string     | null: false                    |
 | text           | text       | null: false                    |
-| category       | integer    | null: false                    |
-| condition      | integer    | null: false                    | #状態
+| category_id    | integer    | null: false                    |
+| condition_id   | integer    | null: false                    | #状態
 | price          | integer    | null: false                    |
 | seller_user_id | references | null: false, foreign_key: true | #出品者
+| image          | string     | null: false                    | 
 
 ### Association
-has_many :users
-has_one :shipping
+belongs_to:users
+has_one :orders
 
 
 ## shippingsテーブル (配送)
 |       Column       |    Type    |    Options  |
 | -------------------| ---------- | ------------|
-| fee_burden         | boolean    | null: false | #手数料負担
 | area               | integer    | null: false |
 | handling_time      | integer    | null: false | #お届けまでの日数
 | post_code          | string     | null: false | 
-| prefecture	       | string     | null: false | #県
+| prefecture_id      | string     | null: false | #県
 | city               | string     | null: false | 
 | address            | string     | null: false | 
 | building_name      | string     |             | 
 | street_address     | string     |             |#番地
-| phone_number       | string     |             | 
 
 ### Association
-belongs_to :items
+belongs_to :orders
+belongs_to :user
 
-## ordersテーブル
+## ordersテーブル(購入情報)
 
-|     Column     | Type       | Options                        |
-| ---------------| ---------- | ------------------------------ |
-| buyer_user_id  | references | null: false, foreign_key: true |
-| item_id	       | references | null: false, foreign_key: true |
+|    Column    | Type       | Options     |
+| -------------| ---------- | ------------|
+| buyer_user   | references | null: false |
+| item	       | references | null: false |
+| phone_number | string     |             | 
 
 ### Association
 belongs_to :user
-belongs_to :item
-
+has_one :shippings
+belongs_to:items
 
 
 

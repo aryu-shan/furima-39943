@@ -46,25 +46,25 @@ has_many:orders
 |     Column      | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
-| text            | text       | null: false                    |
+| explanation     | text       | null: false                    |#説明
 | category_id     | integer    | null: false                    |
-| condition_id    | integer    | null: false                    | #状態
+| condition_id    | integer    | null: false                    |#状態
 | price           | integer    | null: false                    |
-| user            | references | null: false, foreign_key: true | #出品者
+| user            | references | null: false, foreign_key: true |#出品者
 | fee_burden_id   | integer	   | null: false                    |#配送料負担
 | area_id         | integer    | null: false                    |#地域
-| handling_time_id| integer    | null: false                    | #お届けまでの日数
+| handling_time_id| integer    | null: false                    |#お届けまでの日数
 
 ### Association
 belongs_to:user
-has_one :orders
+has_one :order
 
 
 ## shippingsテーブル (配送)
 |       Column       |    Type        |               Options           |
 | -------------------| -------------  | --------------------------------|
 | post_code          | string         | null: false                     | #郵便番号
-| prefecture_id      | string         | null: false                     | #県
+| area_id            | string         | null: false                     | #県
 | city               | string         | null: false                     | #市区町村
 | building_name      | string         |                                 |#建物名
 | street_address     | string         | null: false                     |#番地
@@ -83,7 +83,7 @@ belongs_to :order
 
 ### Association
 belongs_to :user
-has_one :shippings
+has_one :shipping
 belongs_to:item
 
 

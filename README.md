@@ -64,7 +64,7 @@ has_one :order
 |       Column       |    Type        |               Options           |
 | -------------------| -------------  | --------------------------------|
 | post_code          | string         | null: false                     | #郵便番号
-| area_id            | string         | null: false                     | #県
+| area_id            | integer         | null: false                    | #県
 | city               | string         | null: false                     | #市区町村
 | building_name      | string         |                                 |#建物名
 | street_address     | string         | null: false                     |#番地

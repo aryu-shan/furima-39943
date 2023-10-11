@@ -37,8 +37,8 @@ Things you may want to cover:
 | birth_day	         | date       | null: false               |
 
 ### Association
-has_many:item
-has_many:order
+has_many:items
+has_many:orders
 
 
 ## itemsテーブル
@@ -50,14 +50,14 @@ has_many:order
 | category_id     | integer    | null: false                    |
 | condition_id    | integer    | null: false                    | #状態
 | price           | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true | #出品者
-| fee_burden_id   | boolean	   | null: false                    |#配送料負担
-| area_id         | string     | null: false                    |#地域
+| user            | references | null: false, foreign_key: true | #出品者
+| fee_burden_id   | integer	   | null: false                    |#配送料負担
+| area_id         | integer    | null: false                    |#地域
 | handling_time_id| integer    | null: false                    | #お届けまでの日数
 
 ### Association
 belongs_to:user
-has_one :order
+has_one :orders
 
 
 ## shippingsテーブル (配送)
@@ -67,9 +67,9 @@ has_one :order
 | prefecture_id      | string         | null: false                     | #県
 | city               | string         | null: false                     | #市区町村
 | building_name      | string         |                                 |#建物名
-| street_address     | string         |                                 |#番地
-| phone_number       | string         |                                 | #電話番号
-| orders_id          | references     | null: false, foreign_key: true  |
+| street_address     | string         | null: false                     |#番地
+| phone_number       | string         | null: false                     | #電話番号
+| order              | references     | null: false, foreign_key: true  |
 
 ### Association
 belongs_to :order
@@ -78,12 +78,12 @@ belongs_to :order
 
 |    Column    | Type       |      Options                   |
 | -------------| ---------- | -------------------------------|
-| user_id      | references | null: false, foreign_key: true |
-| item_id 	   | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
+| item    	   | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
-has_one :shipping
+has_one :shippings
 belongs_to:item
 
 

@@ -4,10 +4,10 @@ class User < ApplicationRecord
 
    validates :nickname,           presence: true         
    validates :password,format: { with: /\A(?=.*[a-z])(?=.*\d)(?![\p{Katakana}])\w+\z/i, 
-              message: "Please include both letters and numbers, and do not use full-width katakana characters"
+              message: "Password is invalid. Include both letters and numbers"
                }, on: :create
-   validates :family_name,        presence: true, format:{ with: /\A[ぁ-んァ-ヶ一-龥]+\z/, message: "Family name should be full-width characters in kanji, hiragana, or katakana" }
-   validates :first_name,         presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]+\z/, message: "first_name is invalid. Please enter full-width characters" }
+   validates :family_name,        presence: true, format:{ with: /\A[ぁ-んァ-ヶ一-龥]+\z/, message: "Family name is invalid. Input full-width characters" }
+   validates :first_name,         presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]+\z/, message: "First name is invalid. Input full-width characters" }
    validates :family_name_kana,   presence: true, format:{ with: /\A[\p{katakana}\p{blank}]+\z/, message: 'Please enter in the full-width katakana' }
    validates :first_name_kana,    presence: true, format: { with: /\A[\p{katakana}\p{blank}]+\z/, message: 'Please enter in the full-width katakana' }
    validates :birth_day,          presence: true

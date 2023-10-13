@@ -67,7 +67,7 @@ RSpec.describe User, type: :model do
         it 'passwordが半角英数字混合でなければ登録できない' do
           @user.password = 'aaaaaaa'
           @user.valid?
-          expect(@user.errors.full_messages).to include("Password Please include both letters and numbers, and do not use full-width katakana characters")
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Password is invalid. Include both letters and numbers")
         end
 
         it 'passwordが6文字未満では登録できない' do
@@ -80,14 +80,14 @@ RSpec.describe User, type: :model do
             @user.password = '123456'
             @user.password_confirmation = '123456'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Password Please include both letters and numbers, and do not use full-width katakana characters")
+            expect(@user.errors.full_messages).to include("Password Password is invalid. Include both letters and numbers")
           end
 
           it '全角文字を含むpasswordでは登録できない' do
             @user.password = 'ＴＥＳＴ1234'
             @user.password_confirmation = 'ＴＥＳＴ1234'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Password Please include both letters and numbers, and do not use full-width katakana characters")
+            expect(@user.errors.full_messages).to include("Password Password is invalid. Include both letters and numbers")
           end
 
           #名前
@@ -118,13 +118,13 @@ RSpec.describe User, type: :model do
           it 'family_name（全角）に半角文字が含まれていると登録できない' do
             @user.family_name = 'ヤマﾀﾞ'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Family name Family name should be full-width characters in kanji, hiragana, or katakana")
+            expect(@user.errors.full_messages).to include("Family name Family name is invalid. Input full-width characters")
           end
 
           it 'first_name（全角）に半角文字が含まれていると登録できない' do
             @user.first_name = 'タロｳ'
             @user.valid?
-            expect(@user.errors.full_messages).to include("First name first_name is invalid. Please enter full-width characters")
+            expect(@user.errors.full_messages).to include("First name First name is invalid. Input full-width characters")
           end
 
           it 'family_name_kanaにカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do

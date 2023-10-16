@@ -1,4 +1,6 @@
 class ConditionsController < ApplicationController
+
+  class CategorysController < ApplicationController
     def index
       @condition = Condition.order("created_at DESC") 
     end

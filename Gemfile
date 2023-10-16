@@ -73,7 +73,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
 end
+
 
 group :production do
   gem 'pg'
@@ -85,7 +87,4 @@ gem 'pry-doc'
 
 
 gem 'devise'
-gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
-gem 'active_hash'
 

@@ -11,10 +11,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save   # ユーザーが保存された場合の処理
+    if @user.save  
       redirect_to root_path
     else
-       render 'new'  # ユーザーが保存されなかった場合の処理
+       render 'new'
     end
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def destroy
     @user=User.find(params[:id])
     @user.destroy
-    redirect_to root_path # ログアウト後のリダイレクト先を指定します
+    redirect_to root_path 
   end
 
 

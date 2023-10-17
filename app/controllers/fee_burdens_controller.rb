@@ -1,4 +1,4 @@
-class FeeBurdensController < ApplicationController
+class Fee_BurdensController < ApplicationController
   def index
     @fee_burden = Fee_Burden.order("created_at DESC") #記事一覧が新規投稿順に並ぶように記述
   end
@@ -19,6 +19,6 @@ class FeeBurdensController < ApplicationController
   private
 
   def fee_burden_params
-    params.require(:fee_burden).permit(:title,:text,:postage_id)
+    params.require(:fee_burden).permit(:title,:text,:fee_burden_id)
   end
 end

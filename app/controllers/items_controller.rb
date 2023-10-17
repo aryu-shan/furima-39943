@@ -12,14 +12,14 @@ class ItemsController < ApplicationController
   def create
     @item= Item.new(item_params)
     if @item.save
-      redirect_to root_path # 保存成功時のリダイレクト先を設定する（
+      redirect_to root_path 
     else
-      render :new # 保存失敗時は新規作成ページを再表示する
+      render :new 
     end
   end
 
   def item_params
-    params.require(:item).permit(:name,:explanation,:category_id,:condition_id,:price,:fee_burden_id,:area_id,:handling_time_id,:image).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :explanation, :category_id, :condition_id, :price, :fee_burden_id, :area_id, :handling_time_id).merge(user_id: current_user.id)
   end
 
   def move_to_index

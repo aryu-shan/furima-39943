@@ -19,6 +19,6 @@ class CategorysController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:title,:text,:genre_id)
+    params.require(:category).permit(:title,:text,:category_id)
   end
 end

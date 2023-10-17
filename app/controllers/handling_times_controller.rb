@@ -1,6 +1,6 @@
-class HandlingTimesController < ApplicationController
+class Handling_TimesController < ApplicationController
   def index
-    @handling_time = Category.order("created_at DESC") 
+    @handling_time =  Handling_Time.order("created_at DESC") 
   end
 
   def new
@@ -19,6 +19,6 @@ class HandlingTimesController < ApplicationController
   private
 
   def handling_time_params
-    params.require(:handling_time).permit(:title,:text,:genre_id)
+    params.require(:handling_time).permit(:title,:text,:schedule_id)
   end
 end

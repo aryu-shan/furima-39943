@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_004815) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_14_045923) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,46 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_004815) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "areas", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "prefecture_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "genre_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "conditions", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "usage_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "fee_burdens", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "postage_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "handling_times", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "schedule_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "items", charset: "utf8mb4", force: :cascade do |t|

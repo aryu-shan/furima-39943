@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const addTaxPrice = document.getElementById("add-tax-price");
       addTaxPrice.innerHTML = `${fee}`;
       // 販売利益を計算
-      const salesProfit = price - fee;
+      const salesProfit = Math.floor(price - fee);
       // 販売利益を表示
       const profit = document.getElementById("profit");
       profit.innerHTML = `${salesProfit}`;

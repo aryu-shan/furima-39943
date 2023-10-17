@@ -39,14 +39,32 @@ RSpec.describe Item, type: :model do
          expect(@item.errors[:category_id]).to include("can't be blank")
        end
 
+       it "カテゴリーの「---」が選択されている状態では保存ができない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors[:category_id]).to include("can't be blank")
+      end
+
        it "商品の状態がなければ登録できない" do
          @item.condition_id= nil
          @item.valid?
          expect(@item.errors[:condition_id]).to include("can't be blank")
        end
 
+       it "商品の状態の「---」が選択されている状態では保存ができない" do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors[:condition_id]).to include("can't be blank")
+      end
+
        it "配送料の負担がなければ登録できない" do
           @item.fee_burden_id= nil
+          @item.valid?
+          expect(@item.errors[:fee_burden_id]).to include("can't be blank")
+        end
+
+        it "配送料の負担の「---」が選択されている状態では保存ができない" do
+          @item.fee_burden_id = 1
           @item.valid?
           expect(@item.errors[:fee_burden_id]).to include("can't be blank")
         end
@@ -57,34 +75,46 @@ RSpec.describe Item, type: :model do
           expect(@item.errors[:area_id]).to include("can't be blank")
          end
 
+         it "発送元の地域の「---」が選択されている状態では保存ができない" do
+          @item.area_id = 1
+          @item.valid?
+          expect(@item.errors[:area_id]).to include("can't be blank")
+        end
+
          it "発送までの日数がなければ登録できない" do
             @item.handling_time_id= nil
             @item.valid?
             expect(@item.errors[:handling_time_id]).to include("can't be blank")
            end
 
+           it "発送までの日数の「---」が選択されている状態では保存ができない" do
+            @item.handling_time_id = 1
+            @item.valid?
+            expect(@item.errors[:handling_time_id]).to include("can't be blank")
+          end
+
          it "価格がなければ登録できない" do
            @item.price= nil
            @item.valid?
-           expect(@item.errors[:price]).to include("can't be blank", "Price is invalid. Input half-width characters", "must be between 300 and 9,999,999")
+           expect(@item.errors[:price]).to include("Price is invalid. Input half-width characters")
           end
 
           it "価格は半角数値でなければ登録できない" do
             @item.price = "aaaa"
             @item.valid?
-            expect(@item.errors[:price]).to include("must be between 300 and 9,999,999")
+            expect(@item.errors[:price]).to include("Price is invalid. Input half-width characters")
           end
           
             it '価格が範囲外だと登録できない' do
               @item.price = "9999999999"
               @item.valid?
-              expect(@item.errors[:price]).to include("must be between 300 and 9,999,999")
+              expect(@item.errors[:price]).to include("Price is out of setting range")
             end
       
             it '価格が300未満だと登録できない' do
               @item.price = "299"
               @item.valid?
-              expect(@item.errors[:price]).to include("must be between 300 and 9,999,999")
+              expect(@item.errors[:price]).to include("Price is out of setting range")
             end
           end
         end

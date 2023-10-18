@@ -258,6 +258,8 @@ a {
 .item-img {
   width: 33vh;
   height: 33vh;
+  background-size: cover;
+  background-position: center;
 }
 
 .sold-out {
@@ -290,12 +292,14 @@ a {
   font-size: 1.5vh;
   display: flex;
   justify-content: space-between;
+
 }
 
 
 .star-btn {
   display: flex;
   align-items: center;
+
 }
 
 .star-icon {

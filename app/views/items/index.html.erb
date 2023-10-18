@@ -133,7 +133,9 @@
      <% if @items.present? %>
        <% @items.each do |item| %>
          <li class='list'>
+         <%= link_to item_path(item.id) do %>
           <div class="item-img-content">
+           <% link_to item_path(item.id) %>
            <%= image_tag item.image, class: "item-img" %>
 
         <%# 商品が売れていればsold outを表示しましょう %>
@@ -155,6 +157,7 @@
                         </div>
                          </div>
                            </div>
+                           <% end %>
                               </li>
                                <% end %>
                            <% else %>

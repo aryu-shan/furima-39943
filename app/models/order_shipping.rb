@@ -11,23 +11,23 @@ class OrderShipping
       validates :phone_number,format: {with: /\A\d{10,11}\z/,message:"Phone number is invalid. Input only number"}
     end
 
-
     validates :area_id, numericality: {other_than: 0, message: "can't be blank"}
-
+    
     def save
-       order= Order.create(user_id: user_id, item_id: item_id)
-       if order.persisted?
-      Shipping.create(
-        post_code: post_code,
-        area_id: area_id,
-        city: city,
-        building_name: building_name,
-        street_address: street_address,
-        phone_number: phone_number,
-        order_id: order.id
+      order = Order.create(user_id: user_id, item_id: item_id)
+      if order.persisted?
+        Shipping.create(
+          post_code: post_code,
+          area_id: area_id,
+          city: city,
+          street_address: street_address,
+          building_name: building_name,
+          phone_number: phone_number,
+          order_id: order.id
         )
+      else
+        errors.add(:base, 'Failed to save order and shipping information')
+        false
       end
-      errors.add(:base, 'Failed to save order and shipping information')
-      false
     end
   end

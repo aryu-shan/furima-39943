@@ -2,13 +2,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index,:new, :create]
   before_action :set_item, only: [:index, :new, :create]
 
-
   def index
-  gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-   @order = @item.order
-   @order_shipping = OrderShipping.new
+       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+       @order = @item.order
+       @order_shipping = OrderShipping.new
     if @item.order.present? && current_user != @item.user
        redirect_to root_path
+      elsif current_user == @item.user
+        redirect_to root_path
     end
   end
 
@@ -23,6 +24,7 @@ class OrdersController < ApplicationController
        @order_shipping.save
        redirect_to root_path
     else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index
     end
   end

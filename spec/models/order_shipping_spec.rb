@@ -75,7 +75,26 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
 
-      it "tokenが空では登録できないこと" do
+      it '電話番号に半角数字以外が含まれている場合は保存できない' do
+        @order_shipping.phone_number='12345678abc'
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+
+      it 'userが紐付いていなければ保存できない' do
+        @order_shipping.user_id = nil
+        @order_shipping.valid?
+        expect( @order_shipping.errors.full_messages).to include("User can't be blank")
+      end
+
+
+      it 'itemが紐付いていなければ保存できない' do
+        @order_shipping.item_id = nil
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では登録できない" do
         @order_shipping.token =''
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Token can't be blank")

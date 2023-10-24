@@ -6,8 +6,7 @@ class OrderShipping
       validates :user_id
       validates :item_id
       validates :city
-      validates :street_address
-     
+      validates :street_address    
       validates :token
     end
 

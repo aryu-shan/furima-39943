@@ -13,10 +13,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @order_shipping = OrderShipping.new
-  end
-
   def create
        @order_shipping =OrderShipping.new(order_shipping_params)
     if @order_shipping.valid?

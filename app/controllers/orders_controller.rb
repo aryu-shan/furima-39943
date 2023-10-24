@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
 
   def index
+  gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
    @order = @item.order
    @order_shipping = OrderShipping.new
     if @item.order.present? && current_user != @item.user
@@ -18,7 +19,8 @@ class OrdersController < ApplicationController
   def create
        @order_shipping =OrderShipping.new(order_shipping_params)
     if @order_shipping.valid?
-      @order_shipping.save
+      pay_item
+       @order_shipping.save
        redirect_to root_path
     else
       render :index
@@ -32,9 +34,17 @@ class OrdersController < ApplicationController
   end
 
   def order_shipping_params
-    params.require(:order_shipping).permit(:post_code, :area_id, :city, :street_address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:order_shipping).permit(:post_code, :area_id, :city, :street_address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,  # 商品の値段
+      card: params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
   end
 end
-
 
 

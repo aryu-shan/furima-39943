@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
       card: params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      currency: 'jpy'       # 通貨の種類（日本円）
     )
   end
 end
